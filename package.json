@@ -1,0 +1,41 @@
+{
+  "name": "Chatbot_frontend",
+  "version": "1.0.0",
+  "description": "A chatbot for the university community",
+  "main": "Main.js",
+  "author": "Inuwa Muhammad",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack serve"
+  },
+  "dependencies": {
+    "@babel/core": "^7.26.9",
+    "@babel/node": "^7.26.0",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "@langchain/community": "^0.3.40",
+    "@langchain/core": "^0.3.44",
+    "@langchain/textsplitters": "^0.1.0",
+    "@xenova/transformers": "^2.17.2",
+    "axios": "^1.9.0",
+    "babel-loader": "^8.4.0",
+    "chromadb": "^2.2.0",
+    "chromadb-default-embed": "^2.14.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "dotenv": "^16.5.0",
+    "dotenv-webpack": "^8.1.0",
+    "fs-extra": "^11.3.0",
+    "html-webpack-harddisk-plugin": "^2.0.0",
+    "html-webpack-plugin": "^5.6.3",
+    "immer": "^10.1.1",
+    "langchain": "^0.3.21",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "react-transition-group": "4.4.5",
+    "use-immer": "^0.11.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.0"
+  }
+}
