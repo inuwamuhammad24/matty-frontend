@@ -7,7 +7,7 @@ import ModelMessage from "./ModelMessage"
 import { useImmer } from "use-immer"
 import { CSSTransition } from "react-transition-group"
 import FlashMessage from "./FlashMessage"
-const backendURL = "http://10.226.246.77:8000"
+const backendURL = "https://dull-morgen-easyaccess-c71f2507.koyeb.app"
 
 function MainInterface() {
   const chatContainer = useRef(null)
