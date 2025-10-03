@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react"
 import Axios from "axios"
 import SmallLoading from "../../SmallLoading"
-import Markdown from "react-markdown"
 import UserMessage from "./UserMessage"
 import ModelMessage from "./ModelMessage"
 import { useImmer } from "use-immer"
 import { CSSTransition } from "react-transition-group"
 import FlashMessage from "./FlashMessage"
-const backendURL = "https://dull-morgen-easyaccess-c71f2507.koyeb.app"
+// const backendURL = "https://dull-morgen-easyaccess-c71f2507.koyeb.app"
+
+const backendURL = "http://172.21.50.77:8000"
 
 function MainInterface() {
   const chatContainer = useRef(null)
@@ -31,7 +32,7 @@ function MainInterface() {
       setState(draft => {
         // add user input and loading message to UI
         draft.messages.push({ role: "user", content: state.input })
-        draft.messages.push({ role: "model", status: "loading" })
+        draft.messages.push({ role: "assistant", status: "loading" })
         // Empty and focus the input field again
         draft.input = ""
         draft.isGeneratingResponse = true
@@ -41,12 +42,12 @@ function MainInterface() {
 
       // Send an asyncronous request to the backend to generate the response
       try {
-        const response = await Axios.post(`${backendURL}/gen-answer`, { input: state.input })
+        const response = await Axios.post(`${backendURL}/gen-answer`, { input: state.messages.concat([{ role: "user", content: state.input, context: "" }]) })
         if (response.data) {
           // if the response is generated, add it to the UI and remove the loading message
           setState(draft => {
             draft.messages.pop()
-            draft.messages.push({ role: "model", content: response.data })
+            draft.messages.push({ role: "assistant", content: response.data })
             draft.isGeneratingResponse = false
           })
           chatContainer.current.scrollTop = chatContainer.current.scrollHeight

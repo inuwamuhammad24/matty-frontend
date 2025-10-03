@@ -193,6 +193,19 @@
   width: 85%;
 }
 
+.message-content hr {
+  margin: 24px 0;
+}
+
+.message-content h1,
+.message-content h2,
+.message-content h3,
+.message-content h4,
+.message-content h5,
+.message-content h6 {
+  margin-bottom: 12px;
+}
+
 .message-logo img {
   height: 100%;
   width: 45%;
