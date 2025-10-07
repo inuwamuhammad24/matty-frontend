@@ -33,6 +33,7 @@
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
     "react-transition-group": "4.4.5",
+    "typeit-react": "^2.7.8",
     "use-immer": "^0.11.0",
     "webpack": "^5.98.0",
     "webpack-cli": "^6.0.1",

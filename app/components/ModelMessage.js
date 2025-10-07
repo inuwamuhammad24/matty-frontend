@@ -1,5 +1,6 @@
 import React from "react"
 import Markdown from "react-markdown"
+import TypeIt from "typeit-react"
 import SmallLoading from "../../SmallLoading"
 
 export default function ModelMessage(props) {
@@ -15,7 +16,9 @@ export default function ModelMessage(props) {
             <img src="../images/logo1.jpeg" />
           </div>
           <div className="message-content">
-            <Markdown>{props.message}</Markdown>
+            <TypeIt as="div" options={{ cursor: false, speed: 5 }}>
+              <Markdown>{props.message}</Markdown>
+            </TypeIt>
           </div>
         </div>
       )}

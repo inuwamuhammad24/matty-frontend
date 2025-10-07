@@ -83,7 +83,7 @@
 .main-sidebar2-head {
   color: white;
   display: flex;
-  padding: 20px 0;
+  padding: 10px 0;
   justify-content: space-between;
 }
 
@@ -123,9 +123,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 2px solid #373737;
+  border: 2px solid #bed754;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .input-cont button {
@@ -241,7 +241,7 @@
 .loading-small {
   width: 50px;
   height: 50px;
-  border: 2px solid #7da8fd;
+  border: 2px solid #bed754;
   border-bottom-color: transparent;
   border-radius: 50%;
   animation: rotate 1s linear infinite;
@@ -319,6 +319,7 @@
   display: grid;
   place-content: center;
   height: calc(100vh - 300px);
+  text-align: center;
 }
 
 .welcome-cont h1 {
@@ -462,4 +463,8 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.button-cont i {
+  color: #bed754;
 }

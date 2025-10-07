@@ -5,6 +5,7 @@ import UserMessage from "./UserMessage"
 import ModelMessage from "./ModelMessage"
 import { useImmer } from "use-immer"
 import { CSSTransition } from "react-transition-group"
+import TypeIt from "typeit-react"
 import FlashMessage from "./FlashMessage"
 // const backendURL = "https://dull-morgen-easyaccess-c71f2507.koyeb.app"
 
@@ -15,6 +16,7 @@ function MainInterface() {
   const dialogContainer = useRef(null)
   const input = useRef(null)
   const toggleBar = useRef(null)
+  const greet = useRef("Hi there, how may I help Today?")
   const [state, setState] = useImmer({
     isGeneratingResponse: false,
     loadingMessage: "Thinking, Please wait...",
@@ -176,7 +178,13 @@ function MainInterface() {
                 </>
               ) : (
                 <div className="welcome-cont">
-                  <h1>Hi there, how may I help Today?</h1>
+                  <TypeIt as="h1" options={{ cursor: false, speed: 40 }}>
+                    Hello, I'm your{" "}
+                    <span style={{ color: "#BED754" }}>
+                      <em>Assistant</em>
+                    </span>
+                    , How may I help?
+                  </TypeIt>
                 </div>
               )}
             </div>
