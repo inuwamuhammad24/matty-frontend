@@ -54,6 +54,14 @@ config = {
           },
         },
       },
+      {
+        test: /\.css$/i,
+        use: [
+          "style-loader", // Injects styles into DOM
+          "css-loader", // Resolves @import and url()
+          "postcss-loader", // Processes Tailwind + Autoprefixer
+        ],
+      },
     ],
   },
 }
