@@ -13,7 +13,7 @@ export default function ModelMessage(props) {
       ) : (
         <div className="ai-message text-md lg:w-[75%] lg:text-lg w-[95%]">
           <div className="message-logo flex-shrink-0">
-            <img src="../images/logo1.png" />
+            <img src="https://res.cloudinary.com/dlbtbf6vy/image/upload/v1760393145/logo1_jop19l.png" />
           </div>
           <div className="message-content">
             <TypeIt as="div" options={{ cursor: false, speed: 5 }}>
