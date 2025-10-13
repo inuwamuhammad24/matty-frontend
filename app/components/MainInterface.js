@@ -9,9 +9,10 @@ import { CSSTransition } from "react-transition-group"
 import TypeIt from "typeit-react"
 import FlashMessage from "./FlashMessage"
 import "../style.css"
-// const backendURL = "https://dull-morgen-easyaccess-c71f2507.koyeb.app"
 
-const backendURL = "http://172.21.50.77:8000"
+const backendURL = "https://dull-morgen-easyaccess-c71f2507.koyeb.app"
+
+// const backendURL = "http://172.21.50.77:8000"
 
 function MainInterface() {
   const chatContainer = useRef(null)
@@ -111,7 +112,7 @@ function MainInterface() {
         <div className="main-sidebar1 w-1/4 p-5 h-full bg-[#34282c]">
           <div className="main-sidebar1-head mb-[50px]">
             <div className="main-sidebar1-logo">
-              <img src="../images/logo1.png" />
+              <img src="https://res.cloudinary.com/dlbtbf6vy/image/upload/v1760393145/logo1_jop19l.png" />
             </div>
             <h2>Matty</h2>
           </div>
@@ -161,7 +162,7 @@ function MainInterface() {
           <div className="main-sidebar2-head flex justify-between flex-shrink-0 items-center border-b border-b-black">
             <div className="main-sidebar1-head flex items-center ">
               <div className="main-sidebar1-logo">
-                <img src="../images/logo1.png" />
+                <img src="https://res.cloudinary.com/dlbtbf6vy/image/upload/v1760393145/logo1_jop19l.png" />
               </div>
               <h2>Matty</h2>
             </div>

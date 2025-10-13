@@ -11,20 +11,20 @@ const fse = require("fs-extra")
   webpack workflow for this project I'm just
   manually copying our CSS file to the DIST folder. 
 */
-// class RunAfterCompile {
-//   apply(compiler) {
-//     compiler.hooks.done.tap("Copy files", function () {
-//       fse.copySync("./app/style.css", "./dist/style.css")
+class RunAfterCompile {
+  apply(compiler) {
+    compiler.hooks.done.tap("Copy files", function () {
+      fse.copySync("./app/style.css", "./dist/style.css")
 
-//       /*
-//         If you needed to copy another file or folder
-//         such as your "images" folder, you could just
-//         call fse.copySync() as many times as you need
-//         to here to cover all of your files/folders.
-//       */
-//     })
-//   }
-// }
+      /*
+        If you needed to copy another file or folder
+        such as your "images" folder, you could just
+        call fse.copySync() as many times as you need
+        to here to cover all of your files/folders.
+      */
+    })
+  }
+}
 config = {
   entry: "./app/Main.js",
   output: {
