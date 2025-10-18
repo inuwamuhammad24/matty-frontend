@@ -470,3 +470,99 @@ input:checked + .slider:before {
 .button-cont i {
   color: #bed754;
 }
+
+header {
+  background-color: #2d2f30;
+  color: #fff;
+  text-align: center;
+  padding: 30px 15px;
+}
+
+header p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+main {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.about h2 {
+  color: #2d2f30;
+  border-left: 5px solid #2d2f30;
+  padding-left: 10px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+/* Search box */
+.search input {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.search button {
+  padding: 10px 20px;
+  background-color: #004d99;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.search button:hover {
+  background-color: #2d2f30;
+}
+#searchResult {
+  margin-top: 10px;
+  color: #2d2f30;
+}
+
+/* FAQ styles */
+.faq-item {
+  border-bottom: 1px solid #ddd;
+  margin-top: 10px;
+}
+.faq-question {
+  width: 100%;
+  background: #f1f5f9;
+  border: none;
+  text-align: left;
+  padding: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+.faq-question:hover {
+  background: #e0e7ff;
+}
+.faq-answer {
+  display: none;
+  padding: 10px 15px;
+  color: #333;
+}
+
+/* Contact */
+.contact a {
+  color: #2d2f30;
+  text-decoration: none;
+}
+.contact a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 14px;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 import { CircleUserRound, Menu, SendHorizonal, Sidebar, X } from "lucide-react"
+import { Link } from "react-router-dom"
 import Axios from "axios"
 import SmallLoading from "../../SmallLoading"
 import UserMessage from "./UserMessage"
@@ -141,7 +142,7 @@ function MainInterface() {
         <FlashMessage message={state.flashMessage} myclass={state.alertDanger ? "alert-danger" : "alert-success"} />
       </CSSTransition>
       <div className="main-int-cont h-[100dvh] bg-[#1b1b1d] flex justify-between w-full overflow-clip">
-        <div ref={sidebar1} className="main-sidebar1 lg:w-1/4 p-5 lg:h-full bg-[#34282c] lg:relative fixed left-100 w-[80%] z-3 h-[100dvh] border-r-black ">
+        <div ref={sidebar1} className="main-sidebar1 lg:w-1/4 p-5 lg:h-full bg-[#2e2e2e] lg:relative fixed left-100 w-[80%] z-3 h-[100dvh] border-r-black ">
           <div className="main-sidebar1-head mb-[50px]">
             <div className="main-sidebar1-logo">
               <img src="https://res.cloudinary.com/dlbtbf6vy/image/upload/v1760393145/logo1_jop19l.png" />
@@ -181,10 +182,10 @@ function MainInterface() {
                 </div>
               </li>
               <li>
-                <a href="#">
+                <Link to="/help">
                   <i className="bx bx-help-circle"></i>
                   <p>Help</p>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
