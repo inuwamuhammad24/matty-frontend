@@ -1,8 +1,8 @@
-* {
+/* * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
+} */
 
 @import "tailwindcss";
 
@@ -11,6 +11,10 @@
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  transition: all ease 0.33s;
+  position: relative;
+  width: 25%;
+  left: 0;
 }
 
 .main-sidebar1-head {
@@ -28,6 +32,11 @@
 
 .main-sidebar2-head {
   padding: 10px 20px;
+  margin-bottom: 8px;
+}
+
+.main-int-cont {
+  height: 100dvh;
 }
 
 @media screen and (max-width: 600px) {
@@ -37,6 +46,7 @@
   .main-sidebar1 {
     position: fixed;
     left: -999px;
+    width: 80%;
   }
   .main-sidebar2 {
     margin: 0;
@@ -114,13 +124,14 @@
   font-family: "Source sans pro", sans-serif;
   background: transparent;
   color: white;
-  font-size: 1.1em;
+  font-size: 1rem;
   outline: none;
   resize: none;
 }
 
 .input {
   padding: 20px;
+  margin-bottom: 4px;
 }
 
 .input-cont button {
@@ -209,7 +220,7 @@
 .user-message p {
   background: #2a2a2a;
   display: inline-block;
-  padding: 15px;
+  padding: 10px 15px;
   border-radius: 20px 0 20px 20px;
   max-width: 70%;
   text-align: left;

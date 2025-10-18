@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import { Menu, SendHorizonal } from "lucide-react"
+import { CircleUserRound, Menu, SendHorizonal, Sidebar, X } from "lucide-react"
 import Axios from "axios"
 import SmallLoading from "../../SmallLoading"
 import UserMessage from "./UserMessage"
@@ -12,11 +12,16 @@ import "../style.css"
 
 const backendURL = "https://dull-morgen-easyaccess-c71f2507.koyeb.app"
 
-// const backendURL = "http://172.21.50.77:8000"
+// const backendURL = "http://10.208.91.77:8000"
 
 function MainInterface() {
+  const colors = {
+    darkBackground: "#1b1b1d",
+  }
   const chatContainer = useRef(null)
   const dialogContainer = useRef(null)
+  const sideBarMenu = useRef(null)
+  const sidebar1 = useRef(null)
   const input = useRef(null)
   const toggleBar = useRef(null)
   const greet = useRef("Hi there, how may I help Today?")
@@ -29,6 +34,7 @@ function MainInterface() {
     showDialog: false,
     darkMode: true,
     messages: [],
+    isSideBarOpen: false,
   })
   async function handleSubmit(e) {
     e.preventDefault()
@@ -42,8 +48,10 @@ function MainInterface() {
         draft.input = ""
         draft.isGeneratingResponse = true
       })
-      input.current.focus()
-      chatContainer.current.scrollTop = chatContainer.current.scrollHeight
+      // input.current.focus()
+      setTimeout(() => {
+        chatContainer.current.scrollTop = chatContainer.current.scrollHeight
+      }, 100)
 
       // Send an asyncronous request to the backend to generate the response
       try {
@@ -61,7 +69,9 @@ function MainInterface() {
           setState(draft => {
             draft.isGeneratingResponse = false
             draft.messages.pop()
-            chatContainer.current.scrollTop = chatContainer.current.scrollHeight
+            setTimeout(() => {
+              chatContainer.current.scrollTop = chatContainer.current.scrollHeight
+            }, 100)
           })
         }
       } catch (err) {
@@ -89,6 +99,28 @@ function MainInterface() {
     toggleBar.current.checked = state.darkMode
   }
 
+  function toggleSidebar() {
+    // addevent listener to the sidebar menu
+    if (sidebar1.current.style.left == "0px") {
+      sidebar1.current.style.left = "-400px"
+      setState(draft => {
+        draft.isSideBarOpen = false
+      })
+    } else {
+      sidebar1.current.style.left = "0px"
+      setState(draft => {
+        draft.isSideBarOpen = true
+      })
+    }
+  }
+
+  function closeSideBar() {
+    sidebar1.current.style.left = "-400px"
+    setState(draft => {
+      draft.isSideBarOpen = false
+    })
+  }
+
   useEffect(() => {
     chatContainer.current.scrollTop = chatContainer.current.scrollHeight
     input.current.focus()
@@ -108,15 +140,15 @@ function MainInterface() {
       <CSSTransition in={state.alertDanger} timeout={300} classNames={"show-flash"} unmountOnExit>
         <FlashMessage message={state.flashMessage} myclass={state.alertDanger ? "alert-danger" : "alert-success"} />
       </CSSTransition>
-      <div className="main-int-cont h-screen bg-[#1b1b1d] flex justify-between w-full h-full overflow-hidden">
-        <div className="main-sidebar1 w-1/4 p-5 h-full bg-[#34282c]">
+      <div className="main-int-cont h-[100dvh] bg-[#1b1b1d] flex justify-between w-full overflow-clip">
+        <div ref={sidebar1} className="main-sidebar1 lg:w-1/4 p-5 lg:h-full bg-[#34282c] lg:relative fixed left-100 w-[80%] z-3 h-[100dvh] border-r-black ">
           <div className="main-sidebar1-head mb-[50px]">
             <div className="main-sidebar1-logo">
               <img src="https://res.cloudinary.com/dlbtbf6vy/image/upload/v1760393145/logo1_jop19l.png" />
             </div>
             <h2>Matty</h2>
           </div>
-          <div className="main-sidebar1-recent-head mb-8">
+          <div className="main-sidebar1-recent-head">
             <h4>Recent Activities</h4>
           </div>
           <div className="main-sidebar1-menus-cont">
@@ -156,18 +188,22 @@ function MainInterface() {
               </li>
             </ul>
           </div>
+          {/* <div className="absolute top-0 right-0 bottom-0 left-0 bg-black z-1"></div> */}
         </div>
 
-        <div className="main-sidebar2 w-3/4 flex flex-col h-full">
-          <div className="main-sidebar2-head flex justify-between flex-shrink-0 items-center border-b border-b-black">
+        <div className="main-sidebar2 w-3/4 flex flex-col h-full mb-4">
+          <div className="main-sidebar2-head sticky top-[0px] flex justify-between flex-shrink-0 items-center border-b border-b-black">
             <div className="main-sidebar1-head flex items-center ">
               <div className="main-sidebar1-logo">
                 <img src="https://res.cloudinary.com/dlbtbf6vy/image/upload/v1760393145/logo1_jop19l.png" />
               </div>
               <h2>Matty</h2>
             </div>
-            <div className="text-white">
-              <Menu />
+            <div onClick={toggleSidebar} ref={sideBarMenu} className="sidebar-menu text-white p-1 hover:bg-emerald-950 rounded-xs block sm:hidden">
+              {state.isSideBarOpen ? <X /> : <Menu />}
+            </div>
+            <div className="sidebar-menu text-white p-1 hover:bg-emerald-950 rounded-xs hidden sm:block">
+              <CircleUserRound />
             </div>
           </div>
           <div className="chat-cont h-full relative w-[90%] overflow-y-auto flex flex-col">
@@ -186,11 +222,11 @@ function MainInterface() {
                 <div className="welcome-cont">
                   <TypeIt as="div" options={{ cursor: false, speed: 40 }}>
                     <h1 className="text-xl lg:text-2xl">
-                      Hello, I'm your{" "}
+                      Hello, I'm{" "}
                       <span className="text-[#7cb3f3]">
-                        <em>Assistant</em>
-                      </span>
-                      , How may I help?
+                        <em>Matty,</em>
+                      </span>{" "}
+                      Your Unijos vitual Assistant, How may I help?
                     </h1>
                   </TypeIt>
                 </div>
@@ -198,7 +234,7 @@ function MainInterface() {
             </div>
             <div className="input-cont">
               <form onSubmit={handleSubmit}>
-                <div className="input flex justify-between items-center rounded-xl bg-[#2e2e2e] border border-[#2e2e2e] focus-within:border-[#7cb3f3]">
+                <div className="input flex justify-between items-center rounded-xl bg-[#2e2e2e] border border-[#2e2e2e] focus-within:border-[#7cb3f3] mb-[4px]">
                   <textarea
                     ref={input}
                     name="input"
@@ -209,7 +245,7 @@ function MainInterface() {
                       })
                     }
                     type={"text"}
-                    placeholder="Ask Matty UJ related questions"
+                    placeholder="Ask Unijos related questions"
                   ></textarea>
                   <div className="button-cont">
                     {state.isGeneratingResponse ? (
@@ -220,6 +256,9 @@ function MainInterface() {
                       </button>
                     )}
                   </div>
+                </div>
+                <div>
+                  <p className="text-[#666666] text-xs">Matty's response might include mistakes</p>
                 </div>
               </form>
             </div>
