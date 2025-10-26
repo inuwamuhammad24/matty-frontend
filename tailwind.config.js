@@ -1,9 +1,7 @@
 module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {
-      fontFamily: {
-        heading: ['"Source Sans Pro", "Lucida Grande"', "sans-serif"], // Example custom font family
-      },
-    },
+    extend: {},
   },
+  plugins: [],
 }
