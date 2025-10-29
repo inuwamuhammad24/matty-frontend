@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 
 export default function CountDown() {
-  // 🎯 Launch date: October 29, 2025 at 3:00 PM
+  // Launch date: October 29, 2025 at 3:00 PM
   const targetDate = new Date("2025-10-29T15:00:00").getTime()
 
   const [timeLeft, setTimeLeft] = useState({

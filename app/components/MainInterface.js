@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import { CircleUserRound, Menu, SendHorizonal, Sidebar, X } from "lucide-react"
+import { BadgeQuestionMark, CircleUserRound, Menu, MessagesSquare, SendHorizonal, Settings, Sidebar, X } from "lucide-react"
 import { Link } from "react-router-dom"
 import Axios from "axios"
 import SmallLoading from "../../SmallLoading"
@@ -10,6 +10,7 @@ import { CSSTransition } from "react-transition-group"
 import TypeIt from "typeit-react"
 import FlashMessage from "./FlashMessage"
 import "../style.css"
+import { AnimatePresence, motion } from "framer-motion"
 
 const backendURL = "https://dull-morgen-easyaccess-c71f2507.koyeb.app"
 
@@ -28,7 +29,7 @@ function MainInterface() {
   const greet = useRef("Hi there, how may I help Today?")
   const [state, setState] = useImmer({
     isGeneratingResponse: false,
-    loadingMessage: "Thinking, Please wait...",
+    loadingMessage: "Thinking...",
     input: "",
     alertDanger: false,
     flashMessage: "Hello and something went wrong",
@@ -36,6 +37,7 @@ function MainInterface() {
     darkMode: true,
     messages: [],
     isSideBarOpen: false,
+    isFlashVisible: false,
   })
   async function handleSubmit(e) {
     e.preventDefault()
@@ -66,8 +68,9 @@ function MainInterface() {
           })
           chatContainer.current.scrollTop = chatContainer.current.scrollHeight
         } else {
-          alert("An error has occured, Please try again later")
           setState(draft => {
+            draft.flashMessage = "An error has occured, Please try again later"
+            draft.isFlashVisible = ture
             draft.isGeneratingResponse = false
             draft.messages.pop()
             setTimeout(() => {
@@ -77,8 +80,9 @@ function MainInterface() {
         }
       } catch (err) {
         setState(draft => {
+          draft.flashMessage = "Check your network and try again"
+          draft.isFlashVisible = true
           draft.isGeneratingResponse = false
-          draft.flashMessage = "Something went wrong, try again later"
           draft.alertDanger = true
           draft.messages.pop()
         })
@@ -115,11 +119,11 @@ function MainInterface() {
     }
   }
 
-  function closeSideBar() {
-    sidebar1.current.style.left = "-400px"
-    setState(draft => {
-      draft.isSideBarOpen = false
-    })
+  function handleKeyDown(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault()
+      handleSubmit(e)
+    }
   }
 
   useEffect(() => {
@@ -131,64 +135,74 @@ function MainInterface() {
   useEffect(() => {
     setTimeout(() => {
       setState(draft => {
-        draft.loadingMessage = "Generating response, a moment please..."
+        draft.loadingMessage = "A moment please..."
       })
-    }, 5000)
+    }, 8000)
+    setTimeout(() => {
+      setState(draft => {
+        draft.loadingMessage = "Almost done..."
+      })
+    }, 13000)
   }, [state.loadingMessage])
 
   return (
     <>
-      <CSSTransition in={state.alertDanger} timeout={300} classNames={"show-flash"} unmountOnExit>
-        <FlashMessage message={state.flashMessage} myclass={state.alertDanger ? "alert-danger" : "alert-success"} />
-      </CSSTransition>
+      <FlashMessage isFlashVisible={state.isFlashVisible} setState={setState} message={state.flashMessage} />
       <div className="main-int-cont h-[100dvh] bg-[#1b1b1d] flex justify-between w-full overflow-clip">
         <div ref={sidebar1} className="main-sidebar1 lg:w-1/4 p-5 lg:h-full bg-[#2e2e2e] lg:relative fixed left-100 w-[80%] z-3 h-[100dvh] border-r-black ">
-          <div className="main-sidebar1-head mb-[50px]">
-            <div className="main-sidebar1-logo">
-              <img src="https://res.cloudinary.com/dlbtbf6vy/image/upload/v1760393145/logo1_jop19l.png" />
+          <div>
+            <div className="main-sidebar1-head mb-[50px]">
+              <div className="main-sidebar1-logo">
+                <img src="https://res.cloudinary.com/dlbtbf6vy/image/upload/v1760393145/logo1_jop19l.png" />
+              </div>
+              <h2>Matty</h2>
             </div>
-            <h2>Matty</h2>
-          </div>
-          <div className="main-sidebar1-recent-head">
-            <h4>Recent Activities</h4>
-          </div>
-          <div className="main-sidebar1-menus-cont">
-            <ul>
-              <li>
-                <a href="#">
-                  <i className="bx bx-menu-alt-left"></i>
-                  <p>Simple Inquiry</p>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="bx bx-menu-alt-left"></i>
-                  <p>Illustrative Resources ...</p>
-                </a>
-              </li>
-              <li>
-                <a href="#" onClick={showDialog}>
-                  <i className="bx bx-cog"></i>
-                  <p>Settings</p>
-                </a>
-                <div className="dialog-cont" ref={dialogContainer} style={state.showDialog ? { display: "flex" } : { display: "none" }}>
-                  <div>
-                    <p>Theme</p>
-                  </div>
-                  <label class="switch">
-                    <input type="checkbox" onChange={changeTheme} ref={toggleBar} checked />
-                    <span class="slider round"></span>
-                  </label>
+            <div className="flex flex-col justify-between h-full">
+              <div className="main-sidebar1-recent-head">
+                <h4 className="mb-4">Recent Activities</h4>
+                <div className="main-sidebar1-menus-cont">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <MessagesSquare size={15} />
+                        <p>New Chat</p>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-              </li>
-              <li>
-                <Link to="/help">
-                  <i className="bx bx-help-circle"></i>
-                  <p>Help</p>
-                </Link>
-              </li>
-            </ul>
+              </div>
+              <div className="main-sidebar1-recent-head">
+                <div className="main-sidebar1-menus-cont">
+                  <ul>
+                    <li>
+                      <a href="#" onClick={showDialog}>
+                        <Settings size={15} />
+                        <p>Settings</p>
+                      </a>
+                      <AnimatePresence>
+                        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ duration: 0.33 }} className="dialog-cont" ref={dialogContainer} style={state.showDialog ? { display: "flex" } : { display: "none" }}>
+                          <div>
+                            <p>Theme</p>
+                          </div>
+                          <label class="switch">
+                            <input type="checkbox" onChange={changeTheme} ref={toggleBar} checked />
+                            <span class="slider round"></span>
+                          </label>
+                        </motion.div>
+                      </AnimatePresence>
+                    </li>
+                    <li>
+                      <Link to="/help">
+                        <BadgeQuestionMark size={15} />
+                        <p>Help</p>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
+
           {/* <div className="absolute top-0 right-0 bottom-0 left-0 bg-black z-1"></div> */}
         </div>
 
@@ -245,6 +259,7 @@ function MainInterface() {
                         draft.input = e.target.value
                       })
                     }
+                    onKeyDown={handleKeyDown}
                     type={"text"}
                     placeholder="Ask Unijos related questions"
                   ></textarea>
@@ -252,7 +267,7 @@ function MainInterface() {
                     {state.isGeneratingResponse ? (
                       <SmallLoading width={"30px"} height={"30px"} border={"2px solid #fff"} borderBotton={"2px solid transparent"} position={"relative"} marginRight={"5px"} transform={"none"} top={"0"} left={"0"} />
                     ) : (
-                      <button>
+                      <button type="submit">
                         <SendHorizonal size={"18px"} />
                       </button>
                     )}

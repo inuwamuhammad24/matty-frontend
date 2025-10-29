@@ -10,8 +10,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/" element={<CountDown />} />
+        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<CountDown />} /> */}
         <Route path="/help" element={<Help />} />
       </Routes>
     </BrowserRouter>
