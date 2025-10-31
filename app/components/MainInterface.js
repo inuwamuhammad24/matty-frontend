@@ -56,45 +56,49 @@ function MainInterface() {
         chatContainer.current.scrollTop = chatContainer.current.scrollHeight
       }, 100)
 
-      setState(draft => {
-        draft.flashMessage = "Temporary Issue: We're currently experiencing a service disruption and are actively working on a fix. We'll be back as soon as possible!"
-        draft.isFlashVisible = true
-        draft.isGeneratingResponse = false
-        draft.alertDanger = true
-        draft.messages.pop()
-        draft.messages.pop()
-      })
+      // Error message
+      // setState(draft => {
+      //   draft.flashMessage = "Temporary Issue: We're currently experiencing a service disruption and are actively working on a fix. We'll be back as soon as possible!"
+      //   draft.isFlashVisible = true
+      //   draft.isGeneratingResponse = false
+      //   draft.alertDanger = true
+      //   draft.messages.pop()
+      //   draft.messages.pop()
+      // })
+
       // Send an asyncronous request to the backend to generate the response
-      // try {
-      //   const response = await Axios.post(`${backendURL}/gen-answer`, { input: state.messages.concat([{ role: "user", content: state.input, context: "" }]) })
-      //   if (response.data) {
-      //     // if the response is generated, add it to the UI and remove the loading message
-      //     setState(draft => {
-      //       draft.messages.pop()
-      //       draft.messages.push({ role: "assistant", content: response.data })
-      //       draft.isGeneratingResponse = false
-      //     })
-      //     chatContainer.current.scrollTop = chatContainer.current.scrollHeight
-      //   } else {
-      //     setState(draft => {
-      //       draft.flashMessage = "An error has occured, Please try again later"
-      //       draft.isFlashVisible = ture
-      //       draft.isGeneratingResponse = false
-      //       draft.messages.pop()
-      //       setTimeout(() => {
-      //         chatContainer.current.scrollTop = chatContainer.current.scrollHeight
-      //       }, 100)
-      //     })
-      //   }
-      // } catch (err) {
-      //   setState(draft => {
-      //     draft.flashMessage = "Check your network and try again"
-      //     draft.isFlashVisible = true
-      //     draft.isGeneratingResponse = false
-      //     draft.alertDanger = true
-      //     draft.messages.pop()
-      //   })
-      // }
+      try {
+        const response = await Axios.post(`${backendURL}/gen-answer`, { input: state.messages.concat([{ role: "user", content: state.input, context: "" }]) })
+        if (response.data) {
+          // if the response is generated, add it to the UI and remove the loading message
+          console.log(response.data)
+          setState(draft => {
+            draft.messages.pop()
+            draft.messages.push({ role: "assistant", content: response.data })
+            draft.isGeneratingResponse = false
+          })
+          chatContainer.current.scrollTop = chatContainer.current.scrollHeight
+        } else {
+          setState(draft => {
+            draft.flashMessage = "We ran into an issue, please try again later"
+            draft.isFlashVisible = true
+            draft.isGeneratingResponse = false
+            draft.messages.pop()
+            draft.messages.pop()
+            setTimeout(() => {
+              chatContainer.current.scrollTop = chatContainer.current.scrollHeight
+            }, 100)
+          })
+        }
+      } catch (err) {
+        setState(draft => {
+          draft.flashMessage = "Check your network and try again"
+          draft.isFlashVisible = true
+          draft.isGeneratingResponse = false
+          draft.alertDanger = true
+          draft.messages.pop()
+        })
+      }
     }
   }
 

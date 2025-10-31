@@ -167,6 +167,12 @@
   margin-bottom: 30px;
 }
 
+.ai-message ul li,
+.ai-message ol li {
+  margin-bottom: 18px;
+  list-style: all;
+}
+
 .ai-message a {
   text-decoration: none;
   color: #0095c6;
