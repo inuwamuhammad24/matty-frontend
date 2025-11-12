@@ -1,6 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import About from "./components/About"
 import CountDown from "./components/CountDown"
 import Help from "./components/Help"
 
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         {/* <Route path="/" element={<CountDown />} /> */}
         <Route path="/help" element={<Help />} />
+        <Route path="/about" element={<About darkMode={true} />} />
       </Routes>
     </BrowserRouter>
   )

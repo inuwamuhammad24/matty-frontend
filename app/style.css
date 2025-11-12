@@ -19,7 +19,6 @@
 
 .main-sidebar1-head {
   text-align: center;
-  color: #fff;
   font-family: sans-serif;
   display: flex;
   gap: 0.5em;
@@ -70,7 +69,6 @@
 
 .main-sidebar1-recent-head {
   margin-bottom: 24px;
-  color: #fff;
   font-family: "Inter", sans-serif;
   font-size: 0.9rem;
 }
@@ -85,12 +83,12 @@
   display: flex;
   padding: 10px;
   border-radius: 20px;
-  color: #fff;
   text-decoration: none;
   font-family: "Source sans pro", sans-serif;
   font-weight: 100;
   align-items: center;
   gap: 1em;
+  position: relative;
 }
 
 .main-sidebar2-head div i {
@@ -123,7 +121,6 @@
   border: none;
   font-family: "Source sans pro", sans-serif;
   background: transparent;
-  color: white;
   font-size: 1rem;
   outline: none;
   resize: none;
@@ -135,8 +132,6 @@
 }
 
 .input-cont button {
-  color: #7cb3f3;
-  background: #2a2a2a;
   padding: 12px;
   border-radius: 50%;
   right: 14px;
@@ -332,7 +327,6 @@
 
 .welcome-cont h1 {
   font-family: "Source sans pro", sans-serif;
-  color: #e8eaed;
 }
 
 /* flash message styling */
@@ -398,8 +392,7 @@
 
 /* dialog box styling */
 .dialog-cont {
-  background: #18191d;
-  padding: 28px 15px;
+  padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -407,11 +400,11 @@
   font-family: "Source sans pro", sans-serif;
   border-radius: 10px;
   position: absolute;
-  inset: 0;
   top: 35px;
   z-index: 1;
   display: none;
   transition: background 1s ease-in-out;
+  width: 100%;
 }
 
 .switch {
